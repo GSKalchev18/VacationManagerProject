@@ -29,33 +29,60 @@ namespace VacationManagerWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Users obj)
         {
-            _db.Users.Add(obj);
-            _db.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                _db.Users.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
             return RedirectToAction("Index");
         }
 
-        public IActionResult Delete()
+        //public IActionResult Delete()
+        //{
+        //    return View("DeleteUser");
+        //}
+
+        //[HttpDelete]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult Delete(Users obj)
+        //{
+        //    _db.Users.Remove(obj);
+        //    _db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
+
+        public IActionResult Edit(int? id)
         {
-            return View("DeleteUser");
+            if (id==null || id ==0)
+            {
+                return NotFound();
+            }
+            var UserFromDb = _db.Users.Find(id);
+            return View("EditUser" , UserFromDb);
         }
 
-        [HttpDelete]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(Users obj)
+        public IActionResult Edit(Users obj)
         {
-            _db.Users.Remove(obj);
-            _db.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                _db.Users.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
             return RedirectToAction("Index");
         }
 
-        public IActionResult Edit()
+        public IActionResult Details(int? id)
         {
-            return View("EditUser");
-        }
-
-        public IActionResult Details()
-        {
-            return View("UserDetails");
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var UserFromDb = _db.Users.Find(id);
+            return View("UserDetails", UserFromDb);
         }
 
     }
