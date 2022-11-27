@@ -25,8 +25,5 @@ namespace VacationManagerWeb.Models
         [ForeignKey("Teams")]
         public int? TeamId { get; set; }
         public Teams? Teams { get; set; }
-
-        public ICollection<Vacations> Vacations { get; set; } = new HashSet<Vacations>();
-        public ICollection<Teams> Team { get; set; } = new HashSet<Teams>();
     }
 }

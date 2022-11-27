@@ -11,9 +11,7 @@ namespace VacationManagerWeb.Models
         public string? Description { get; set; }
 
         [ForeignKey("Teams")]
-        public int TeamId { get; set; }
-        public Teams Teams { get; set; }
-
-        public ICollection<Teams> Team { get; set; } = new HashSet<Teams>();
+        public int? TeamId { get; set; }
+        public Teams? Teams { get; set; }
     }
 }

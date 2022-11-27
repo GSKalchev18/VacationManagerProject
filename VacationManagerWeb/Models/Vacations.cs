@@ -7,8 +7,9 @@ namespace VacationManagerWeb.Models
     {
         [Key]
         public int Id { get; set; }
-
+        [NotMapped]
         public DateOnly? DateFrom { get; set; }
+        [NotMapped]
         public DateOnly? DateTo { get; set; }
         public DateTime DateRequest { get; set; } = DateTime.Now;
 

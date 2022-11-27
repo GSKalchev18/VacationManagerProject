@@ -14,15 +14,12 @@ namespace VacationManagerWeb.Models
         public string? Developers { get; set; }
 
         [ForeignKey("Projects")]
-        public int ProjectId { get; set; }
-        public Projects Projects { get; set; }
+        public int? ProjectId { get; set; }
+        public Projects? Projects { get; set; }
 
         [ForeignKey("Users")]
-        public int TeamLeader { get; set; }
-        public Users Users { get; set; }
-
-        public ICollection<Projects> Project { get; set; } = new HashSet<Projects>();
-        public ICollection<Users> User { get; set; } = new HashSet<Users>();
+        public int? TeamLeader { get; set; }
+        public Users? Users { get; set; }
 
     }
 }
