@@ -68,11 +68,11 @@ namespace VacationManagerWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Users.Add(obj);
+                _db.Users.Update(obj);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return View(obj);
         }
 
         public IActionResult Details(int? id)
