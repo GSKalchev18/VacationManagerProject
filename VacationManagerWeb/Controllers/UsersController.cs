@@ -25,6 +25,29 @@ namespace VacationManagerWeb.Controllers
             return View("CreateUser");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Users obj)
+        {
+            _db.Users.Add(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete()
+        {
+            return View("DeleteUser");
+        }
+
+        [HttpDelete]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(Users obj)
+        {
+            _db.Users.Remove(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Edit()
         {
             return View("EditUser");
