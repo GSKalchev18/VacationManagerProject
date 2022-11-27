@@ -38,20 +38,6 @@ namespace VacationManagerWeb.Controllers
             return RedirectToAction("Index");
         }
 
-        //public IActionResult Delete()
-        //{
-        //    return View("DeleteUser");
-        //}
-
-        //[HttpDelete]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Delete(Users obj)
-        //{
-        //    _db.Users.Remove(obj);
-        //    _db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
-
         public IActionResult Edit(int? id)
         {
             if (id==null || id ==0)
@@ -73,6 +59,31 @@ namespace VacationManagerWeb.Controllers
                 return RedirectToAction("Index");
             }
             return View(obj);
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var UserFromDb = _db.Users.Find(id);
+            return View("DeleteUser", UserFromDb);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePost(int? id)
+        {
+            var obj = _db.Users.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            _db.Users.Remove(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         public IActionResult Details(int? id)
