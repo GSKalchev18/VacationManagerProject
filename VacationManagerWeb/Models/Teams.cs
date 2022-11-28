@@ -11,12 +11,6 @@ namespace VacationManagerWeb.Models
         [MaxLength(32)]
         public string Name { get; set; }
 
-        public string? Developers { get; set; }
-
-        [ForeignKey("Projects")]
-        public int? ProjectId { get; set; }
-        public Projects? Projects { get; set; }
-
         [ForeignKey("Users")]
         public int? TeamLeader { get; set; }
         public Users? Users { get; set; }

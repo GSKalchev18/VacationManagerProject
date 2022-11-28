@@ -19,11 +19,5 @@ namespace VacationManagerWeb.Models
         [Required]
         [MaxLength(32)]
         public string LastName { get; set; }
-        
-        public string? Role { get; set; }
-
-        [ForeignKey("Teams")]
-        public int? TeamId { get; set; }
-        public Teams? Teams { get; set; }
     }
 }
