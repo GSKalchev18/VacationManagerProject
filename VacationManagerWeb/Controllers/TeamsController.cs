@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using VacationManagerWeb.Data;
 using VacationManagerWeb.Models;
@@ -22,7 +23,7 @@ namespace VacationManagerWeb.Controllers
 
         public IActionResult Create()
         {
-            //ViewBag.TeamLeader = User;
+            ViewBag.TeamLeader = new SelectList(_db.Users, "Id", "Username");
             return View("CreateTeam");
         }
 
@@ -36,6 +37,31 @@ namespace VacationManagerWeb.Controllers
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var TeamFromDb = _db.Teams.Find(id);
+            return View("DeleteTeam", TeamFromDb);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePost(int? id)
+        {
+            var obj = _db.Teams.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            _db.Teams.Remove(obj);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
     }
