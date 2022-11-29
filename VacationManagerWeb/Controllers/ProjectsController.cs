@@ -63,5 +63,29 @@ namespace VacationManagerWeb.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var ProjectsFromDb = _db.Projects.Find(id);
+            ViewBag.TeamId = new SelectList(_db.Teams, "Id", "Name");
+            return View("Edit", ProjectsFromDb);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Projects obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Projects.Update(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(obj);
+        }
     }
 }
