@@ -17,8 +17,13 @@ namespace VacationManagerWeb.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Teams> odjTeamsList = _db.Teams.ToList();
-            return View(odjTeamsList);
+            List<Teams> odjTeamsList = _db.Teams.ToList();
+            List<Users> odjUsersList = _db.Users.ToList();
+            TeamsUsersModel objTeamsUsersModel = new TeamsUsersModel();
+            objTeamsUsersModel.TeamsViewModel = odjTeamsList;
+            objTeamsUsersModel.UsersViewModel = odjUsersList;
+
+            return View(objTeamsUsersModel);
         }
 
         public IActionResult Create()
